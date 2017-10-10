@@ -7,8 +7,9 @@ router.get('/', function (req, res) {
     conn.query('SELECT 1 + 1 AS solution', function (err, rows, fileds) {
       console.log('rows:', rows)
       console.log('fileds:', fileds)
-      res.send('Birds home page');
-      conn.release()
+      res.json({rows: rows, fileds: fileds})
+      res.end();
+      conn.release();
     })
   })
 });
