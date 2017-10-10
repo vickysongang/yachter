@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 app.use(express.static('public'));
-
+app.set('view engine', 'ejs');
 // 设置默认超时时间
 app.use(timeout('15s'));
 app.use(bodyParser.json());
