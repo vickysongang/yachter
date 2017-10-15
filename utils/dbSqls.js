@@ -18,6 +18,9 @@ const QUERY_GRADES_SQL = 'select * from grade'
 const QUERY_PROVINCES_SQL = 'select * from province'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
+const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category,content,' +
+  'images,created_at,updated_at) values (?,?,?,?,?,?,?)'
+
 module.exports = {
   INSERT_USER_SQL: INSERT_USER_SQL,
   UPDATE_USER_SQL: UPDATE_USER_SQL,
@@ -28,5 +31,6 @@ module.exports = {
   QUERY_GRADES_SQL: QUERY_GRADES_SQL,
   QUERY_CATEGORY_SQL: QUERY_CATEGORY_SQL,
   QUERY_PROVINCES_SQL: QUERY_PROVINCES_SQL,
-  QUERY_USERINFO_SQL: QUERY_USERINFO_SQL
+  QUERY_USERINFO_SQL: QUERY_USERINFO_SQL,
+  INSERT_NOTICE_SQL: INSERT_NOTICE_SQL
 }
