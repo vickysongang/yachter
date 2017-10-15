@@ -37,8 +37,8 @@ router.post('/insert', function (req, res) {
 
 router.post('/list', function (req, res) {
   var body = req.body
-  var page = body.page || 0
-  var count = body.count || 10
+  var page = parseInt(body.page || 0)
+  var count = parseInt(body.count || 10)
   var skip = page * count
   var params = [skip, count]
   return dbUtils.getDBConnection(function (err, conn) {
