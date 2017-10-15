@@ -16,6 +16,7 @@ const QUERY_COLLEGES_SQL = 'select * from college where school_id = ?'
 const QUERY_MAJORS_SQL = 'select * from major where college_id = ?'
 const QUERY_GRADES_SQL = 'select * from grade'
 const QUERY_PROVINCES_SQL = 'select * from province'
+const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
 module.exports = {
   INSERT_USER_SQL: INSERT_USER_SQL,
@@ -25,6 +26,7 @@ module.exports = {
   QUERY_COLLEGES_SQL: QUERY_COLLEGES_SQL,
   QUERY_MAJORS_SQL: QUERY_MAJORS_SQL,
   QUERY_GRADES_SQL: QUERY_GRADES_SQL,
+  QUERY_CATEGORY_SQL: QUERY_CATEGORY_SQL,
   QUERY_PROVINCES_SQL: QUERY_PROVINCES_SQL,
   QUERY_USERINFO_SQL: QUERY_USERINFO_SQL
 }

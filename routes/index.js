@@ -104,4 +104,23 @@ router.all('/provinces', function (req, res) {
   })
 });
 
+router.post('/categorys', function (req, res) {
+  var body = req.body
+  var params = [body.module]
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.QUERY_CATEGORY_SQL, params, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      res.end();
+      conn.release();
+    })
+  })
+});
+
 module.exports = router;
