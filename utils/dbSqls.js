@@ -18,7 +18,7 @@ const QUERY_GRADES_SQL = 'select * from grade'
 const QUERY_PROVINCES_SQL = 'select * from province'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
-const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category,content,' +
+const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_id,content,' +
   'images,created_at,updated_at) values (?,?,?,?,?,?,?)'
 
 module.exports = {

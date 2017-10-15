@@ -13,7 +13,7 @@ router.post('/insert', function (req, res) {
     var params = [
       body.title,
       body.openId,
-      body.category,
+      body.categoryId,
       body.content,
       body.images,
       now,
