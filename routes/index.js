@@ -104,7 +104,7 @@ router.all('/provinces', function (req, res) {
   })
 });
 
-router.post('/categorys', function (req, res) {
+router.post('/categories', function (req, res) {
   var body = req.body
   var params = [body.module]
   return dbUtils.getDBConnection(function (err, conn) {
