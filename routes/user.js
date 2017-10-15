@@ -60,4 +60,25 @@ router.post('/queryById', function (req, res) {
   })
 });
 
+router.post('/queryInfoById', function (req, res) {
+  var body = req.body
+  return dbUtils.getDBConnection(function (err, conn) {
+    var params = [
+      body.openId
+    ]
+    conn.query(dbSqls.QUERY_USERINFO_SQL, params, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      conn.release();
+    })
+  })
+});
+
+
 module.exports = router;
