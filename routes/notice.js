@@ -35,4 +35,25 @@ router.post('/insert', function (req, res) {
   })
 });
 
+router.post('/list', function (req, res) {
+  var body = req.body
+  var page = body.page || 0
+  var count = body.count || 10
+  var skip = page * count
+  var params = [skip, count]
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.QUERY_NOTICES_SQL, params, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      conn.release();
+    })
+  })
+});
+
 module.exports = router;
