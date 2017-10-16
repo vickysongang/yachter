@@ -25,6 +25,10 @@ const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstra
   'pubTime,u.nickname creatorName from notice n, user u,category c' +
   ' where n.category_id = c.id and n.open_id = ' +
   'u.open_id and n.type = ? order by n.created_at desc limit ?, ?'
+const GET_NOTICE_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
+  'pubTime, u.nickname creatorName from notice n,user u where n.open_id = u.open_id and n.id = ?'
+const DELETE_NOTICE_SQL = 'delete from notice where id = ?'
+const UPDATE_READCOUNT_SQL = 'update notice set read_count = read_count + 1 where id = ?'
 
 module.exports = {
   INSERT_USER_SQL: INSERT_USER_SQL,
@@ -38,5 +42,8 @@ module.exports = {
   QUERY_PROVINCES_SQL: QUERY_PROVINCES_SQL,
   QUERY_USERINFO_SQL: QUERY_USERINFO_SQL,
   INSERT_NOTICE_SQL: INSERT_NOTICE_SQL,
-  QUERY_NOTICES_SQL: QUERY_NOTICES_SQL
+  QUERY_NOTICES_SQL: QUERY_NOTICES_SQL,
+  GET_NOTICE_DETAIL_SQL: GET_NOTICE_DETAIL_SQL,
+  DELETE_NOTICE_SQL: DELETE_NOTICE_SQL,
+  UPDATE_READCOUNT_SQL: UPDATE_READCOUNT_SQL
 }
