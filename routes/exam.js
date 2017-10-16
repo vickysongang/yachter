@@ -20,7 +20,7 @@ router.post('/insert', function (req, res) {
       now,
       now
     ]
-    conn.query(dbSqls.INSERT_NOTICE_SQL, params, function (err, result) {
+    conn.query(dbSqls.INSERT_EXAM_SQL, params, function (err, result) {
       if (err) {
         res.json({
           code: -1,
@@ -43,7 +43,7 @@ router.post('/list', function (req, res) {
   var skip = page * count
   var params = [body.type, skip, count]
   return dbUtils.getDBConnection(function (err, conn) {
-    conn.query(dbSqls.QUERY_NOTICES_SQL, params, function (err, result) {
+    conn.query(dbSqls.QUERY_EXAMS_SQL, params, function (err, result) {
       if (err) {
         res.json({
           code: -1,
@@ -61,7 +61,7 @@ router.post('/detail', function (req, res) {
   var body = req.body
   var params = [body.id]
   return dbUtils.getDBConnection(function (err, conn) {
-    conn.query(dbSqls.GET_NOTICE_DETAIL_SQL, params, function (err, result) {
+    conn.query(dbSqls.GET_EXAM_DETAIL_SQL, params, function (err, result) {
       if (err) {
         res.json({
           code: -1,
@@ -79,7 +79,7 @@ router.post('/delete', function (req, res) {
   var body = req.body
   var params = [body.id]
   return dbUtils.getDBConnection(function (err, conn) {
-    conn.query(dbSqls.DELETE_NOTICE_SQL, params, function (err, result) {
+    conn.query(dbSqls.DELETE_EXAM_SQL, params, function (err, result) {
       if (err) {
         res.json({
           code: -1,
@@ -97,7 +97,7 @@ router.post('/readcount/incr', function (req, res) {
   var body = req.body
   var params = [body.id]
   return dbUtils.getDBConnection(function (err, conn) {
-    conn.query(dbSqls.INCR_NOTICE_READCOUNT_SQL, params, function (err, result) {
+    conn.query(dbSqls.INCR_EXAM_READCOUNT_SQL, params, function (err, result) {
       if (err) {
         res.json({
           code: -1,

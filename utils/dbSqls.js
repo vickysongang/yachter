@@ -28,7 +28,19 @@ const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstra
 const GET_NOTICE_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime, u.nickname creatorName from notice n,user u where n.open_id = u.open_id and n.id = ?'
 const DELETE_NOTICE_SQL = 'delete from notice where id = ?'
-const UPDATE_READCOUNT_SQL = 'update notice set read_count = read_count + 1 where id = ?'
+const INCR_NOTICE_READCOUNT_SQL = 'update notice set read_count = read_count + 1 where id = ?'
+
+const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_id,content,type,' +
+  'images,created_at,updated_at) values (?,?,?,?,?,?,?,?)'
+const QUERY_EXAMS_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
+  'n.read_count readCount,c.name categoryName,c.code categoryCode,date_format(n.created_at,"%Y-%m-%d") ' +
+  'pubTime,u.nickname creatorName from exam n, user u,category c' +
+  ' where n.category_id = c.id and n.open_id = ' +
+  'u.open_id and n.type = ? order by n.created_at desc limit ?, ?'
+const GET_EXAM_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
+  'pubTime, u.nickname creatorName from exam n,user u where n.open_id = u.open_id and n.id = ?'
+const DELETE_EXAM_SQL = 'delete from exam where id = ?'
+const INCR_EXAM_READCOUNT_SQL = 'update exam set read_count = read_count + 1 where id = ?'
 
 module.exports = {
   INSERT_USER_SQL: INSERT_USER_SQL,
@@ -45,5 +57,10 @@ module.exports = {
   QUERY_NOTICES_SQL: QUERY_NOTICES_SQL,
   GET_NOTICE_DETAIL_SQL: GET_NOTICE_DETAIL_SQL,
   DELETE_NOTICE_SQL: DELETE_NOTICE_SQL,
-  UPDATE_READCOUNT_SQL: UPDATE_READCOUNT_SQL
+  INCR_NOTICE_READCOUNT_SQL: INCR_NOTICE_READCOUNT_SQL,
+  INSERT_EXAM_SQL: INSERT_EXAM_SQL,
+  QUERY_EXAMS_SQL: QUERY_EXAMS_SQL,
+  GET_EXAM_DETAIL_SQL: GET_EXAM_DETAIL_SQL,
+  DELETE_EXAM_SQL: DELETE_EXAM_SQL,
+  INCR_EXAM_READCOUNT_SQL: INCR_EXAM_READCOUNT_SQL
 }
