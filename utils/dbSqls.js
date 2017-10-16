@@ -18,13 +18,13 @@ const QUERY_GRADES_SQL = 'select * from grade'
 const QUERY_PROVINCES_SQL = 'select * from province'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
-const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_id,content,' +
-  'images,created_at,updated_at) values (?,?,?,?,?,?,?)'
+const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_id,content,type' +
+  'images,created_at,updated_at) values (?,?,?,?,?,?,?,?)'
 const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,c.name categoryName,c.code categoryCode,date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime,u.nickname creatorName from notice n, user u,category c' +
   ' where n.category_id = c.id and n.open_id = ' +
-  'u.open_id order by n.created_at desc limit ?, ?'
+  'u.open_id and n.type = ? order by n.created_at desc limit ?, ?'
 
 module.exports = {
   INSERT_USER_SQL: INSERT_USER_SQL,

@@ -15,6 +15,7 @@ router.post('/insert', function (req, res) {
       body.openId,
       body.categoryId,
       body.content,
+      body.type,
       body.images,
       now,
       now
@@ -40,7 +41,7 @@ router.post('/list', function (req, res) {
   var page = parseInt(body.page || 0)
   var count = parseInt(body.count || 10)
   var skip = page * count
-  var params = [skip, count]
+  var params = [body.type, skip, count]
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_NOTICES_SQL, params, function (err, result) {
       if (err) {
