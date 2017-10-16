@@ -18,7 +18,7 @@ const QUERY_GRADES_SQL = 'select * from grade'
 const QUERY_PROVINCES_SQL = 'select * from province'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
-const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_id,content,type' +
+const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_id,content,type,' +
   'images,created_at,updated_at) values (?,?,?,?,?,?,?,?)'
 const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,c.name categoryName,c.code categoryCode,date_format(n.created_at,"%Y-%m-%d") ' +
