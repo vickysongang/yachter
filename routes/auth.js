@@ -2,7 +2,7 @@
  * Created by songang on 2017/10/17.
  */
 var express = require('express');
-var request = require('request');
+var superagent = require('superagent');
 var router = express.Router();
 var APPID = 'wx493583df6c66012e'
 var SECRET = 'd15a6b79e9417a9f9824f1a71b8e8f8c'
@@ -12,14 +12,13 @@ router.post('/', function (req, res) {
   var body = req.body
   var code = body.code
   //调用request请求api转换登录凭证
-  request({
-    url: AUTH_URL + '?appid=' + APPID + '&secret=' + SECRET + '&grant_type=authorization_code&js_code=' + code,
-    header: {
-      'content-type': 'application/json'
-    }
-  }, function (err, result) {
-    res.json(result)
-  })
+  var url = AUTH_URL + '?appid=' + APPID + '&secret=' + SECRET + '&grant_type=authorization_code&js_code=' + code
+  superagent
+    .get(url)
+    .set('content-type', 'application/json')
+    .end(function (err, result) {
+      res.json(result)
+    })
 });
 
 
