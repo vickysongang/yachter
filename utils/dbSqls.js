@@ -42,6 +42,9 @@ const GET_EXAM_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_coun
 const DELETE_EXAM_SQL = 'delete from exam where id = ?'
 const INCR_EXAM_READCOUNT_SQL = 'update exam set read_count = read_count + 1 where id = ?'
 
+const INSERT_FEEDBACK_SQL = 'insert into feedback(open_id,content,created_at,updated_at' +
+  ') values (?,?,?,?)'
+
 module.exports = {
   INSERT_USER_SQL: INSERT_USER_SQL,
   UPDATE_USER_SQL: UPDATE_USER_SQL,
@@ -62,5 +65,6 @@ module.exports = {
   QUERY_EXAMS_SQL: QUERY_EXAMS_SQL,
   GET_EXAM_DETAIL_SQL: GET_EXAM_DETAIL_SQL,
   DELETE_EXAM_SQL: DELETE_EXAM_SQL,
-  INCR_EXAM_READCOUNT_SQL: INCR_EXAM_READCOUNT_SQL
+  INCR_EXAM_READCOUNT_SQL: INCR_EXAM_READCOUNT_SQL,
+  INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL
 }
