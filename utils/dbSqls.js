@@ -26,7 +26,7 @@ const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstra
   ' where n.category_id = c.id and n.open_id = ' +
   'u.open_id and n.type = ? order by n.created_at desc limit ?, ?'
 const GET_NOTICE_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
-  'pubTime, u.nickname creatorName from notice n,user u where n.open_id = u.open_id and n.id = ?'
+  'pubTime, u.nickname creatorName, n.open_id openId from notice n,user u where n.open_id = u.open_id and n.id = ?'
 const DELETE_NOTICE_SQL = 'delete from notice where id = ?'
 const INCR_NOTICE_READCOUNT_SQL = 'update notice set read_count = read_count + 1 where id = ?'
 
@@ -38,7 +38,7 @@ const QUERY_EXAMS_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract
   ' where n.category_id = c.id and n.open_id = ' +
   'u.open_id and n.type = ? order by n.created_at desc limit ?, ?'
 const GET_EXAM_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
-  'pubTime, u.nickname creatorName from exam n,user u where n.open_id = u.open_id and n.id = ?'
+  'pubTime, u.nickname creatorName, n.open_id openId from exam n,user u where n.open_id = u.open_id and n.id = ?'
 const DELETE_EXAM_SQL = 'delete from exam where id = ?'
 const INCR_EXAM_READCOUNT_SQL = 'update exam set read_count = read_count + 1 where id = ?'
 
