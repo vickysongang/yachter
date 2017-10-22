@@ -18,13 +18,12 @@ const QUERY_GRADES_SQL = 'select * from grade'
 const QUERY_PROVINCES_SQL = 'select * from province'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
-const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_id,content,type,' +
+const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,' +
   'images,created_at,updated_at) values (?,?,?,?,?,?,?,?)'
 const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
-  'n.read_count readCount,c.name categoryName,c.code categoryCode,date_format(n.created_at,"%Y-%m-%d") ' +
-  'pubTime,u.nickname creatorName from notice n, user u,category c' +
-  ' where n.category_id = c.id and n.open_id = ' +
-  'u.open_id and n.type = ? order by n.created_at desc limit ?, ?'
+  'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
+  'pubTime,u.nickname creatorName from notice n, user u' +
+  ' where n.open_id = u.open_id and n.type = ? order by n.created_at desc limit ?, ?'
 const GET_NOTICE_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime, u.nickname creatorName, n.open_id openId from notice n,user u where n.open_id = u.open_id and n.id = ?'
 const DELETE_NOTICE_SQL = 'delete from notice where id = ?'
