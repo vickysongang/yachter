@@ -87,6 +87,41 @@ router.all('/grades', function (req, res) {
   })
 });
 
+
+router.all('/years', function (req, res) {
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.QUERY_YEARS_SQL, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      res.end();
+      conn.release();
+    })
+  })
+});
+
+router.all('/seasons', function (req, res) {
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.QUERY_SEASONS_SQL, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      res.end();
+      conn.release();
+    })
+  })
+});
+
 router.all('/provinces', function (req, res) {
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_PROVINCES_SQL, function (err, result) {
