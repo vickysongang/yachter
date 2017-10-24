@@ -38,7 +38,7 @@ const INCR_NOTICE_READCOUNT_SQL = 'update notice set read_count = read_count + 1
 //schedule
 const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,content,year,season_id,images,' +
   'created_at,updated_at) values (?,?,?,?,?,?,?,?,?)'
-const QUERY_SCHEDULES_SQL = 'select c.name collegeName,year,season_id seasonId, se.code seasonCode, se.name seasonName' +
+const QUERY_SCHEDULES_SQL = 'select s.id,c.name collegeName,s.year,s.season_id seasonId, se.code seasonCode, se.name seasonName' +
   ' from schedule s, season se, college c  where s.season_id = se.id and s.college_id = c.id limit ?, ?'
 const GET_SCHEDULE_DETAIL_SQL = 'select s.id,s.content, s.images, s.open_id, date_format(s.created_at,"%Y-%m-%d"),s.season_id,' +
   ' u.nickname creatorName, se.code seasonCode, se.name seasonName from schedule s,' +
