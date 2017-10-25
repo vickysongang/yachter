@@ -41,7 +41,7 @@ router.post('/list', function (req, res) {
   var page = parseInt(body.page || 0)
   var count = parseInt(body.count || 10)
   var skip = page * count
-  var params = [body.type, skip, count]
+  var params = [body.type, body.collegeId skip, count]
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_EXAMS_SQL, params, function (err, result) {
       if (err) {
