@@ -25,7 +25,7 @@ const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
 //notice
 const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,' +
-  'images,school_id,college_id,grade_id,approve_flag,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?)'
+  'images,school_id,college_id,grade_id,approve_flag,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?)'
 const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime,u.nickname creatorName from notice n, user u' +
