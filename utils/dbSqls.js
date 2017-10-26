@@ -72,6 +72,12 @@ const DELETE_EXAM_SQL = 'delete from exam where id = ?'
 const INCR_EXAM_READCOUNT_SQL = 'update exam set read_count = read_count + 1 where id = ?'
 
 
+//banner
+const QUERY_BANNERS_SQL = 'select id, cover from banner where module = ? and type = ? and college_id = ? and grade_id = ?'
+const GET_BANNER_DETAIL_SQL = 'select b.id, b.title,b.content,b.images,date_format(b.created_at,"%Y-%m-%d") pubTime, ' +
+  'u.nickname creatorName, b.open_id openId from banner b,user u where b.open_id = u.open_id and b.id = ?'
+const DELETE_BANNER_SQL = 'delete from banner where id = ?'
+
 //feedback
 const INSERT_FEEDBACK_SQL = 'insert into feedback(open_id,content,created_at,updated_at' +
   ') values (?,?,?,?)'
@@ -103,5 +109,8 @@ module.exports = {
   QUERY_SCHEDULES_SQL: QUERY_SCHEDULES_SQL,
   GET_SCHEDULE_DETAIL_SQL: GET_SCHEDULE_DETAIL_SQL,
   DELETE_SCHEDULE_SQL: DELETE_SCHEDULE_SQL,
+  QUERY_BANNERS_SQL: QUERY_BANNERS_SQL,
+  GET_BANNER_DETAIL_SQL: GET_BANNER_DETAIL_SQL,
+  DELETE_BANNER_SQL: DELETE_BANNER_SQL,
   INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL
 }
