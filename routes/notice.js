@@ -45,7 +45,7 @@ router.post('/list', function (req, res) {
   var page = parseInt(body.page || 0)
   var count = parseInt(body.count || 10)
   var skip = page * count
-  var params = [body.type, body.collegeId, skip, count]
+  var params = [body.type, body.collegeId, body.gradeId, skip, count]
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_NOTICES_SQL, params, function (err, result) {
       if (err) {
