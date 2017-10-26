@@ -25,7 +25,7 @@ const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
 //notice
 const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,' +
-  'images,created_at,updated_at) values (?,?,?,?,?,?,?,?)'
+  'images,school_id,college_id,grade_id,approve_flag,created_at,updated_at) values (?,?,?,?,?,?,?,?)'
 const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime,u.nickname creatorName from notice n, user u' +
@@ -85,9 +85,9 @@ module.exports = {
   GET_EXAM_DETAIL_SQL: GET_EXAM_DETAIL_SQL,
   DELETE_EXAM_SQL: DELETE_EXAM_SQL,
   INCR_EXAM_READCOUNT_SQL: INCR_EXAM_READCOUNT_SQL,
-  INSERT_SCHEDULE_SQL:INSERT_SCHEDULE_SQL,
-  QUERY_SCHEDULES_SQL:QUERY_SCHEDULES_SQL,
-  GET_SCHEDULE_DETAIL_SQL:GET_SCHEDULE_DETAIL_SQL,
-  DELETE_SCHEDULE_SQL:DELETE_SCHEDULE_SQL,
+  INSERT_SCHEDULE_SQL: INSERT_SCHEDULE_SQL,
+  QUERY_SCHEDULES_SQL: QUERY_SCHEDULES_SQL,
+  GET_SCHEDULE_DETAIL_SQL: GET_SCHEDULE_DETAIL_SQL,
+  DELETE_SCHEDULE_SQL: DELETE_SCHEDULE_SQL,
   INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL
 }
