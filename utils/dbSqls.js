@@ -62,7 +62,7 @@ const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_name,content,ty
 const QUERY_EXAMS_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime,u.nickname creatorName from exam n, user u where n.open_id = u.open_id ' +
-  'and n.type = ? and n.college_id = ? and approve_flag = ? order by n.created_at desc limit ?, ?'
+  'and n.type = ? and n.college_id = ? and approve_flag = ? order by n.rank, n.created_at desc limit ?, ?'
 
 const GET_EXAM_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime, u.nickname creatorName, n.open_id openId from exam n,user u where n.open_id = u.open_id and n.id = ?'
