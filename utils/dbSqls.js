@@ -24,8 +24,8 @@ const QUERY_PROVINCES_SQL = 'select * from province'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
 //notice
-const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,' +
-  'images,school_id,college_id,grade_id,approve_flag,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?)'
+const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,images,school_id,' +
+  'college_id,grade_id,approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?)'
 
 const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
@@ -39,28 +39,38 @@ const DELETE_NOTICE_SQL = 'delete from notice where id = ?'
 
 const INCR_NOTICE_READCOUNT_SQL = 'update notice set read_count = read_count + 1 where id = ?'
 
+
 //schedule
 const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,content,year,season_id,images,' +
   'created_at,updated_at) values (?,?,?,?,?,?,?,?,?)'
+
 const QUERY_SCHEDULES_SQL = 'select s.id,c.name collegeName,s.year,s.season_id seasonId, se.code seasonCode, ' +
   'se.name seasonName from schedule s, season se, college c, user u  where s.season_id = se.id' +
-  ' and s.college_id = c.id and s.open_id = u.open_id and u.college_id = ? limit ?, ?'
+  ' and s.college_id = c.id and s.open_id = u.open_id and n.college_id = ? limit ?, ?'
+
 const GET_SCHEDULE_DETAIL_SQL = 'select s.id,s.content,s.year, s.images, s.open_id openId, date_format(s.created_at,"%Y-%m-%d") pubTime,s.season_id,' +
   ' u.nickname creatorName, se.code seasonCode, se.name seasonName from schedule s,' +
   'user u, season se where s.open_id = u.open_id and s.season_id = se.id and s.id = ? '
+
 const DELETE_SCHEDULE_SQL = 'delete from schedule where id = ?'
 
+
 //exam
-const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_name,content,type,' +
-  'images,created_at,updated_at) values (?,?,?,?,?,?,?,?)'
+const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_name,content,type,images,school_id,' +
+  'college_id,approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?)'
+
 const QUERY_EXAMS_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
-  'pubTime,u.nickname creatorName from exam n, user u' +
-  ' where n.open_id = u.open_id and n.type = ? and u.college_id = ? order by n.created_at desc limit ?, ?'
+  'pubTime,u.nickname creatorName from exam n, user u where n.open_id = u.open_id ' +
+  'and n.type = ? and n.college_id = ? and approve_flag = ? order by n.created_at desc limit ?, ?'
+
 const GET_EXAM_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime, u.nickname creatorName, n.open_id openId from exam n,user u where n.open_id = u.open_id and n.id = ?'
+
 const DELETE_EXAM_SQL = 'delete from exam where id = ?'
+
 const INCR_EXAM_READCOUNT_SQL = 'update exam set read_count = read_count + 1 where id = ?'
+
 
 //feedback
 const INSERT_FEEDBACK_SQL = 'insert into feedback(open_id,content,created_at,updated_at' +

@@ -21,6 +21,7 @@ router.post('/insert', function (req, res) {
       body.collegeId,
       body.gradeId,
       body.approveFlag,
+      0,
       now,
       now
     ]
