@@ -81,7 +81,17 @@ router.post('/query', function (req, res) {
         }
       }
     })
-    res.json(result)
+    if (result.length > 0) {
+      res.json({
+        code: 0,
+        result: result
+      })
+    } else {
+      res.json({
+        code: 1,
+        msg: '对不起，没有符合条件的考生数据，请重新核实查询条件！'
+      })
+    }
   });
 })
 
