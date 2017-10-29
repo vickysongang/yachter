@@ -7,6 +7,7 @@ var examRouter = require('./routes/exam');
 var authRouter = require('./routes/auth');
 var scheduleRouter = require('./routes/schedule');
 var bannerRouter = require('./routes/banner');
+var scoreRouter = require('./routes/score');
 var feedbackRouter = require('./routes/feedback');
 var bodyParser = require('body-parser');
 
@@ -26,6 +27,7 @@ app.use('/exam', examRouter);
 app.use('/auth', authRouter);
 app.use('/schedule', scheduleRouter);
 app.use('/banner', bannerRouter);
+app.use('/score', scoreRouter);
 app.use('/feedback', feedbackRouter);
 
 app.use(function(req, res, next) {

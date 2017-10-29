@@ -158,4 +158,25 @@ router.post('/categories', function (req, res) {
   })
 });
 
+router.all('/config', function (req, res) {
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.GET_CONFIG_SQL, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        if (result.length > 0) {
+          res.json(result[0])
+        } else {
+          res.json({})
+        }
+      }
+      res.end();
+      conn.release();
+    })
+  })
+});
+
 module.exports = router;

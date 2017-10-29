@@ -82,6 +82,9 @@ const DELETE_BANNER_SQL = 'delete from banner where id = ?'
 const INSERT_FEEDBACK_SQL = 'insert into feedback(open_id,content,created_at,updated_at' +
   ') values (?,?,?,?)'
 
+//config
+const GET_CONFIG_SQL = 'select * from config limit 1'
+
 module.exports = {
   INSERT_USER_SQL: INSERT_USER_SQL,
   UPDATE_USER_SQL: UPDATE_USER_SQL,
@@ -112,5 +115,6 @@ module.exports = {
   QUERY_BANNERS_SQL: QUERY_BANNERS_SQL,
   GET_BANNER_DETAIL_SQL: GET_BANNER_DETAIL_SQL,
   DELETE_BANNER_SQL: DELETE_BANNER_SQL,
-  INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL
+  INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL,
+  GET_CONFIG_SQL: GET_CONFIG_SQL
 }
