@@ -9,6 +9,7 @@ var scheduleRouter = require('./routes/schedule');
 var bannerRouter = require('./routes/banner');
 var scoreRouter = require('./routes/score');
 var feedbackRouter = require('./routes/feedback');
+var randeCodeRouter = require('./routes/randCode');
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -29,6 +30,7 @@ app.use('/schedule', scheduleRouter);
 app.use('/banner', bannerRouter);
 app.use('/score', scoreRouter);
 app.use('/feedback', feedbackRouter);
+app.use('/randcode', randeCodeRouter);
 
 app.use(function(req, res, next) {
   // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器

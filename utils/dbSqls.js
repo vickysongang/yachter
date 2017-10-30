@@ -9,8 +9,8 @@ const UPDATE_USER_SQL = 'update user set nickname=?, gender=?, avatar_url=? ' +
   'where open_id=?'
 const QUERY_USER_SQL = 'select * from user where open_id = ?'
 const QUERY_USERINFO_SQL = 'select u.open_id, u.school_id,s.name school_name, u.college_id,' +
-  'c.name college_name, u.major_id, m.name major_name, u.grade_id,' +
-  'g.name grade_name from user u ,school s, college c, major m, grade g ' +
+  'c.name college_name, u.major_id, m.name major_name, u.grade_id, ' +
+  'g.name grade_name, u.status from user u ,school s, college c, major m, grade g ' +
   'where u.school_id = s.id and u.college_id = c.id and u.major_id = m.id and u.grade_id = g.id and u.open_id = ?'
 
 //common
