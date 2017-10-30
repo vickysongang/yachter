@@ -29,11 +29,11 @@ const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,conten
 
 const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
-  'pubTime,u.nickname creatorName from notice n, user u where n.open_id = u.open_id and n.type = ?' +
+  'pubTime,u.nickname creatorName from notice n left join user u on n.open_id = u.open_id where n.type = ?' +
   ' and n.college_id = ? and n.grade_id = ? and approve_flag = ? order by rank,n.created_at desc limit ?, ?'
 
 const GET_NOTICE_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
-  'pubTime, u.nickname creatorName, n.open_id openId from notice n,user u where n.open_id = u.open_id and n.id = ?'
+  'pubTime, u.nickname creatorName, n.open_id openId from notice n left join user u on n.open_id = u.open_id where n.id = ?'
 
 const DELETE_NOTICE_SQL = 'delete from notice where id = ?'
 
@@ -45,12 +45,12 @@ const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,c
   'created_at,updated_at) values (?,?,?,?,?,?,?,?,?)'
 
 const QUERY_SCHEDULES_SQL = 'select s.id,c.name collegeName,s.year,s.season_id seasonId, se.code seasonCode, ' +
-  'se.name seasonName from schedule s, season se, college c, user u  where s.season_id = se.id' +
-  ' and s.college_id = c.id and s.open_id = u.open_id and s.college_id = ? limit ?, ?'
+  'se.name seasonName from schedule s left join user u on s.open_id = u.open_id, season se, college c where s.season_id = se.id' +
+  ' and s.college_id = c.id and s.college_id = ? limit ?, ?'
 
 const GET_SCHEDULE_DETAIL_SQL = 'select s.id,s.content,s.year, s.images, s.open_id openId, date_format(s.created_at,"%Y-%m-%d") pubTime,s.season_id,' +
-  ' u.nickname creatorName, se.code seasonCode, se.name seasonName from schedule s,' +
-  'user u, season se where s.open_id = u.open_id and s.season_id = se.id and s.id = ? '
+  ' u.nickname creatorName, se.code seasonCode, se.name seasonName from schedule s left join user u on s.open_id = u.open_id,' +
+  ' season se where s.season_id = se.id and s.id = ? '
 
 const DELETE_SCHEDULE_SQL = 'delete from schedule where id = ?'
 
@@ -61,11 +61,11 @@ const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_name,content,ty
 
 const QUERY_EXAMS_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
-  'pubTime,u.nickname creatorName from exam n, user u where n.open_id = u.open_id ' +
-  'and n.type = ? and n.college_id = ? and approve_flag = ? order by n.rank, n.created_at desc limit ?, ?'
+  'pubTime,u.nickname creatorName from exam n left join user u on n.open_id = u.open_id where ' +
+  'n.type = ? and n.college_id = ? and approve_flag = ? order by n.rank, n.created_at desc limit ?, ?'
 
 const GET_EXAM_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
-  'pubTime, u.nickname creatorName, n.open_id openId from exam n,user u where n.open_id = u.open_id and n.id = ?'
+  'pubTime, u.nickname creatorName, n.open_id openId from exam n left join user u on n.open_id = u.open_id where n.id = ?'
 
 const DELETE_EXAM_SQL = 'delete from exam where id = ?'
 
@@ -75,7 +75,7 @@ const INCR_EXAM_READCOUNT_SQL = 'update exam set read_count = read_count + 1 whe
 //banner
 const QUERY_BANNERS_SQL = 'select id, cover from banner where module = ? and type = ? and college_id = ? and grade_id = ?'
 const GET_BANNER_DETAIL_SQL = 'select b.id, b.title,b.content,b.images,date_format(b.created_at,"%Y-%m-%d") pubTime, ' +
-  'u.nickname creatorName, b.open_id openId from banner b,user u where b.open_id = u.open_id and b.id = ?'
+  'u.nickname creatorName, b.open_id openId from banner b left join user u on b.open_id = u.open_id where b.id = ?'
 const DELETE_BANNER_SQL = 'delete from banner where id = ?'
 
 //feedback
