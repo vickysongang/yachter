@@ -109,6 +109,50 @@ router.all('/classes', function (req, res) {
   })
 });
 
+router.post('/class/insert', function (req, res) {
+  var body = req.body
+  return dbUtils.getDBConnection(function (err, conn) {
+    var params = [
+      body.name,
+      'custom'
+    ]
+    conn.query(dbSqls.INSERT_CLASS_SQL, params, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json({
+          id: result.insertId
+        })
+      }
+      conn.release();
+    })
+  })
+});
+
+router.all('/class/query', function (req, res) {
+  var body = req.body
+  var params = [
+    body.name
+  ]
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.QUERY_CLASS_BYNAME_SQL, params, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      res.end();
+      conn.release();
+    })
+  })
+});
+
 router.all('/places', function (req, res) {
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_PLACES_SQL, function (err, result) {

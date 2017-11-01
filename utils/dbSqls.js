@@ -23,7 +23,8 @@ const QUERY_ALL_CLASSES_SQL = 'select * from class'
 const QUERY_PROVINCES_SQL = 'select * from province'
 const QUERY_PLACES_SQL = 'select * from place'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
-
+const INSERT_CLASS_SQL = 'insert into class(name,type) values (?,?)'
+const QUERY_CLASS_BYNAME_SQL = 'select * from class where name = ?'
 //notice
 const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,images,school_id,' +
   'college_id,grade_id,approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?)'
@@ -118,5 +119,7 @@ module.exports = {
   GET_BANNER_DETAIL_SQL: GET_BANNER_DETAIL_SQL,
   DELETE_BANNER_SQL: DELETE_BANNER_SQL,
   INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL,
-  GET_CONFIG_SQL: GET_CONFIG_SQL
+  GET_CONFIG_SQL: GET_CONFIG_SQL,
+  INSERT_CLASS_SQL: INSERT_CLASS_SQL,
+  QUERY_CLASS_BYNAME_SQL:QUERY_CLASS_BYNAME_SQL
 }
