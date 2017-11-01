@@ -3,8 +3,8 @@
  */
 // user
 const INSERT_USER_SQL = 'insert into user(nickname,gender,avatar_url,' +
-  'open_id,school_id,college_id,major_id,grade_id,province_id,phone,' +
-  'created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?)'
+  'open_id,school_id,college_id,major_id,year,class_id,place_id,phone,' +
+  'created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?)'
 const UPDATE_USER_SQL = 'update user set nickname=?, gender=?, avatar_url=? ' +
   'where open_id=?'
 const QUERY_USER_SQL = 'select * from user where open_id = ?'
@@ -17,10 +17,11 @@ const QUERY_USERINFO_SQL = 'select u.open_id, u.school_id,s.name school_name, u.
 const QUERY_SCHOOLS_SQL = 'select * from school'
 const QUERY_COLLEGES_SQL = 'select * from college where school_id = ?'
 const QUERY_MAJORS_SQL = 'select * from major where college_id = ?'
-const QUERY_GRADES_SQL = 'select * from grade'
 const QUERY_YEARS_SQL = 'select * from year'
-const QUERY_SEASONS_SQL = 'select * from season'
+const QUERY_DEFAULT_CLASSES_SQL = 'select * from class where type="default"'
+const QUERY_ALL_CLASSES_SQL = 'select * from class'
 const QUERY_PROVINCES_SQL = 'select * from province'
+const QUERY_PLACES_SQL = 'select * from place'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 
 //notice
@@ -92,11 +93,12 @@ module.exports = {
   QUERY_SCHOOLS_SQL: QUERY_SCHOOLS_SQL,
   QUERY_COLLEGES_SQL: QUERY_COLLEGES_SQL,
   QUERY_MAJORS_SQL: QUERY_MAJORS_SQL,
-  QUERY_GRADES_SQL: QUERY_GRADES_SQL,
   QUERY_YEARS_SQL: QUERY_YEARS_SQL,
-  QUERY_SEASONS_SQL: QUERY_SEASONS_SQL,
+  QUERY_DEFAULT_CLASSES_SQL: QUERY_DEFAULT_CLASSES_SQL,
+  QUERY_ALL_CLASSES_SQL: QUERY_ALL_CLASSES_SQL,
   QUERY_CATEGORY_SQL: QUERY_CATEGORY_SQL,
   QUERY_PROVINCES_SQL: QUERY_PROVINCES_SQL,
+  QUERY_PLACES_SQL: QUERY_PLACES_SQL,
   QUERY_USERINFO_SQL: QUERY_USERINFO_SQL,
   INSERT_NOTICE_SQL: INSERT_NOTICE_SQL,
   QUERY_NOTICES_SQL: QUERY_NOTICES_SQL,

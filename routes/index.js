@@ -70,24 +70,6 @@ router.post('/majors', function (req, res) {
   })
 });
 
-router.all('/grades', function (req, res) {
-  return dbUtils.getDBConnection(function (err, conn) {
-    conn.query(dbSqls.QUERY_GRADES_SQL, function (err, result) {
-      if (err) {
-        res.json({
-          code: -1,
-          msg: err
-        })
-      } else {
-        res.json(result)
-      }
-      res.end();
-      conn.release();
-    })
-  })
-});
-
-
 router.all('/years', function (req, res) {
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_YEARS_SQL, function (err, result) {
@@ -105,9 +87,31 @@ router.all('/years', function (req, res) {
   })
 });
 
-router.all('/seasons', function (req, res) {
+router.all('/classes', function (req, res) {
+  var body = req.body
+  var sql = dbSqls.QUERY_ALL_CLASSES_SQL
+  if (body.type === 'default') {
+    sql = dbSqls.QUERY_DEFAULT_CLASSES_SQL
+  }
   return dbUtils.getDBConnection(function (err, conn) {
-    conn.query(dbSqls.QUERY_SEASONS_SQL, function (err, result) {
+    conn.query(sql, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      res.end();
+      conn.release();
+    })
+  })
+});
+
+router.all('/places', function (req, res) {
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.QUERY_PLACES_SQL, function (err, result) {
       if (err) {
         res.json({
           code: -1,
@@ -178,7 +182,6 @@ router.all('/config', function (req, res) {
     })
   })
 });
-
 
 
 module.exports = router;
