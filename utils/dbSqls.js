@@ -14,14 +14,17 @@ const QUERY_USERINFO_SQL = 'select u.open_id, u.school_id,s.name school_name, u.
   'where u.school_id = s.id and u.college_id = c.id and u.major_id = m.id and u.grade_id = g.id and u.open_id = ?'
 
 //common
-const QUERY_SCHOOLS_SQL = 'select * from school'
-const QUERY_COLLEGES_SQL = 'select * from college where school_id = ?'
-const QUERY_MAJORS_SQL = 'select * from major where college_id = ?'
+const QUERY_SCHOOLS_SQL = 'select * from school order by rank'
+const QUERY_COLLEGES_SQL = 'select c.id, c.name from college c, school_to_college sc' +
+  ' where sc.college_id = c.id and sc.school_id = ? order by sc.rank'
+const QUERY_MAJORS_SQL = 'select m.id, m.name from major m, college_to_major cm where m.id = cm.major_id' +
+  ' and cm.college_id = ? and cm.year = ? order by rank'
 const QUERY_YEARS_SQL = 'select * from year'
 const QUERY_DEFAULT_CLASSES_SQL = 'select * from class where type="default"'
 const QUERY_ALL_CLASSES_SQL = 'select * from class'
 const QUERY_PROVINCES_SQL = 'select * from province'
-const QUERY_PLACES_SQL = 'select * from place'
+const QUERY_PLACES_SQL = 'select p.id,p.name from place p, school_to_place sp ' +
+  'where p.id = sp.place_id and sp.school_id = ? order by rank'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 const INSERT_CLASS_SQL = 'insert into class(name,type) values (?,?)'
 const QUERY_CLASS_BYNAME_SQL = 'select * from class where name = ?'

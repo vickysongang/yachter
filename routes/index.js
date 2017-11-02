@@ -53,7 +53,7 @@ router.post('/colleges', function (req, res) {
 
 router.post('/majors', function (req, res) {
   var body = req.body
-  var params = [body.collegeId]
+  var params = [body.collegeId, body.year]
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_MAJORS_SQL, params, function (err, result) {
       if (err) {
@@ -154,8 +154,12 @@ router.all('/class/query', function (req, res) {
 });
 
 router.all('/places', function (req, res) {
+  var body = req.body
+  var params = [
+    body.schoolId
+  ]
   return dbUtils.getDBConnection(function (err, conn) {
-    conn.query(dbSqls.QUERY_PLACES_SQL, function (err, result) {
+    conn.query(dbSqls.QUERY_PLACES_SQL, params, function (err, result) {
       if (err) {
         res.json({
           code: -1,
