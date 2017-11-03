@@ -30,13 +30,22 @@ const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 const INSERT_CLASS_SQL = 'insert into class(name,type) values (?,?)'
 const QUERY_CLASS_BYNAME_SQL = 'select * from class where name = ?'
 //notice
-const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,images,school_id,' +
-  'college_id,grade_id,approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?)'
+const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,images,' +
+  'approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?)'
+const INSERT_NOTICE_REL_SQL = 'insert into notice_relation(major_id,college_id,place_id,year,notice_id)' +
+  'values (?,?,?,?,?)'
 
-const QUERY_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
-  'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
-  'pubTime,u.nickname creatorName from notice n left join user u on n.open_id = u.open_id where n.type = ?' +
-  ' and n.college_id = ? and n.grade_id = ? and approve_flag = ? order by rank,n.created_at desc limit ?, ?'
+const QUERY_COLLEGE_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
+  'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") pubTime,' +
+  'u.nickname creatorName from notice n left join user u on n.open_id = u.open_id, notice_relation ' +
+  'nr where n.type = ? and n.id = nr.notice_id and nr.college_id = ? and nr.place_id = ? and ' +
+  'n.approve_flag = ? order by nr.rank,n.created_at desc limit ?, ?'
+
+const QUERY_CLASS_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
+  'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") pubTime,' +
+  'u.nickname creatorName from notice n left join user u on n.open_id = u.open_id, notice_relation ' +
+  'nr where n.type = ? and n.id = nr.notice_id and nr.major_id = ? and nr.place_id = ? and nr.year = ? ' +
+  'and n.approve_flag = ? order by nr.rank,n.created_at desc limit ?, ?'
 
 const GET_NOTICE_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime, u.nickname creatorName, n.open_id openId from notice n left join user u on n.open_id = u.open_id where n.id = ?'
@@ -106,7 +115,9 @@ module.exports = {
   QUERY_PLACES_SQL: QUERY_PLACES_SQL,
   QUERY_USERINFO_SQL: QUERY_USERINFO_SQL,
   INSERT_NOTICE_SQL: INSERT_NOTICE_SQL,
-  QUERY_NOTICES_SQL: QUERY_NOTICES_SQL,
+  INSERT_NOTICE_REL_SQL: INSERT_NOTICE_REL_SQL,
+  QUERY_COLLEGE_NOTICES_SQL: QUERY_COLLEGE_NOTICES_SQL,
+  QUERY_CLASS_NOTICES_SQL: QUERY_CLASS_NOTICES_SQL,
   GET_NOTICE_DETAIL_SQL: GET_NOTICE_DETAIL_SQL,
   DELETE_NOTICE_SQL: DELETE_NOTICE_SQL,
   INCR_NOTICE_READCOUNT_SQL: INCR_NOTICE_READCOUNT_SQL,
@@ -125,5 +136,5 @@ module.exports = {
   INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL,
   GET_CONFIG_SQL: GET_CONFIG_SQL,
   INSERT_CLASS_SQL: INSERT_CLASS_SQL,
-  QUERY_CLASS_BYNAME_SQL:QUERY_CLASS_BYNAME_SQL
+  QUERY_CLASS_BYNAME_SQL: QUERY_CLASS_BYNAME_SQL
 }
