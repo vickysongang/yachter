@@ -19,6 +19,7 @@ router.post('/insert', function (req, res) {
       body.images,
       body.schoolId,
       body.collegeId,
+      body.placeId,
       body.approveFlag,
       0,
       now,
@@ -45,7 +46,7 @@ router.post('/list', function (req, res) {
   var page = parseInt(body.page || 0)
   var count = parseInt(body.count || 10)
   var skip = page * count
-  var params = [body.type, body.collegeId, 'Y', skip, count]
+  var params = [body.type, body.collegeId, body.placeId, 'Y', skip, count]
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_EXAMS_SQL, params, function (err, result) {
       if (err) {

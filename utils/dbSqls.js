@@ -72,12 +72,12 @@ const DELETE_SCHEDULE_SQL = 'delete from schedule where id = ?'
 
 //exam
 const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_name,content,type,images,school_id,' +
-  'college_id,approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?)'
+  'college_id,place_id,approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?)'
 
 const QUERY_EXAMS_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime,u.nickname creatorName from exam n left join user u on n.open_id = u.open_id where ' +
-  'n.type = ? and n.college_id = ? and approve_flag = ? order by n.rank, n.created_at desc limit ?, ?'
+  'n.type = ? and n.college_id = ? and n.place_id = ? and approve_flag = ? order by n.rank, n.created_at desc limit ?, ?'
 
 const GET_EXAM_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime, u.nickname creatorName, n.open_id openId from exam n left join user u on n.open_id = u.open_id where n.id = ?'
