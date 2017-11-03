@@ -64,7 +64,8 @@ const QUERY_SCHEDULES_SQL = 'select s.id,c.name collegeName,s.year,s.place_id,p.
   ' left join user u on s.open_id = u.open_id, college c,place p,class cl where s.place_id = p.id and ' +
   's.class_id=cl.id and s.college_id = c.id and s.school_id = ? and s.college_id = ? limit ?, ?'
 
-const GET_SCHEDULE_DETAIL_SQL = 'select * from schedule s where s.id = ? '
+const GET_SCHEDULE_DETAIL_SQL = 'select s.id,s.content,s.year, s.images, s.open_id openId, date_format(s.created_at,"%Y-%m-%d") pubTime,' +
+  ' u.nickname creatorName from schedule s left join user u on s.open_id = u.open_id where  s.id = ?'
 
 const DELETE_SCHEDULE_SQL = 'delete from schedule where id = ?'
 
