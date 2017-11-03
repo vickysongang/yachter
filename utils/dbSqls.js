@@ -8,10 +8,11 @@ const INSERT_USER_SQL = 'insert into user(nickname,gender,avatar_url,' +
 const UPDATE_USER_SQL = 'update user set nickname=?, gender=?, avatar_url=? ' +
   'where open_id=?'
 const QUERY_USER_SQL = 'select * from user where open_id = ?'
-const QUERY_USERINFO_SQL = 'select u.open_id, u.school_id,s.name school_name, u.college_id,' +
-  'c.name college_name, u.major_id, m.name major_name, u.grade_id, ' +
-  'g.name grade_name, u.status from user u ,school s, college c, major m, grade g ' +
-  'where u.school_id = s.id and u.college_id = c.id and u.major_id = m.id and u.grade_id = g.id and u.open_id = ?'
+const QUERY_USERINFO_SQL = 'select u.open_id, u.school_id,s.name school_name, u.college_id,c.name college_name, u.year, ' +
+  'u.major_id, m.name major_name, u.place_id, p.name place_name, u.class_id, cl.name class_name, ' +
+  'u.status from user u ,school s,college c, major m, place p , class cl where u.school_id = s.id ' +
+  'and u.college_id = c.id and u.major_id = m.id and u.place_id = p.id and u.class_id = cl.id and ' +
+  'u.open_id = ?'
 
 //common
 const QUERY_SCHOOLS_SQL = 'select * from school order by rank'
