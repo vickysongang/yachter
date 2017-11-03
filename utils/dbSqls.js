@@ -38,13 +38,14 @@ const INSERT_NOTICE_REL_SQL = 'insert into notice_relation(major_id,college_id,p
 const QUERY_COLLEGE_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") pubTime,' +
   'u.nickname creatorName from notice n left join user u on n.open_id = u.open_id, notice_relation ' +
-  'nr where n.type = ? and n.id = nr.notice_id and nr.college_id = ? and nr.place_id = ? and ' +
-  'n.approve_flag = ? order by nr.rank,n.created_at desc limit ?, ?'
+  'nr where n.type = ? and n.id = nr.notice_id  and nr.school_id = ? and  nr.college_id = ? and ' +
+  'nr.place_id = ? and n.approve_flag = ? order by nr.rank,n.created_at desc limit ?, ?'
 
 const QUERY_CLASS_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") pubTime,' +
   'u.nickname creatorName from notice n left join user u on n.open_id = u.open_id, notice_relation ' +
-  'nr where n.type = ? and n.id = nr.notice_id and nr.major_id = ? and nr.place_id = ? and nr.year = ? ' +
+  'nr where n.type = ? and n.id = nr.notice_id and nr.school_id = ? and nr.college_id = ? and ' +
+  'nr.major_id = ? and nr.place_id = ? and nr.year = ? ' +
   'and n.approve_flag = ? order by nr.rank,n.created_at desc limit ?, ?'
 
 const GET_NOTICE_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
@@ -56,8 +57,8 @@ const INCR_NOTICE_READCOUNT_SQL = 'update notice set read_count = read_count + 1
 
 
 //schedule
-const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,content,year,season_id,images,' +
-  'created_at,updated_at) values (?,?,?,?,?,?,?,?,?)'
+const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,content,year,class_id,images,' +
+  'place_id,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?)'
 
 const QUERY_SCHEDULES_SQL = 'select s.id,c.name collegeName,s.year,s.season_id seasonId, se.code seasonCode, ' +
   'se.name seasonName from schedule s left join user u on s.open_id = u.open_id, season se, college c where s.season_id = se.id' +
@@ -77,7 +78,8 @@ const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_name,content,ty
 const QUERY_EXAMS_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime,u.nickname creatorName from exam n left join user u on n.open_id = u.open_id where ' +
-  'n.type = ? and n.college_id = ? and n.place_id = ? and approve_flag = ? order by n.rank, n.created_at desc limit ?, ?'
+  'n.type = ? and n.school_id = ? and n.college_id = ? and n.place_id = ? and approve_flag = ?' +
+  ' order by n.rank, n.created_at desc limit ?, ?'
 
 const GET_EXAM_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_count, date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime, u.nickname creatorName, n.open_id openId from exam n left join user u on n.open_id = u.open_id where n.id = ?'
@@ -88,7 +90,10 @@ const INCR_EXAM_READCOUNT_SQL = 'update exam set read_count = read_count + 1 whe
 
 
 //banner
-const QUERY_BANNERS_SQL = 'select id, cover from banner where module = ? and type = ? and college_id = ? and grade_id = ?'
+const QUERY_BANNERS_BY_MAJOR_SQL = 'select id, cover from banner where module = ? and type = ? ' +
+  'and school_id = ? and college_id = ? and major_id = ?'
+const QUERY_BANNERS_BY_COLLEGE_SQL = 'select id, cover from banner where module = ? and type = ? ' +
+  'and school_id = ? and college_id = ?'
 const GET_BANNER_DETAIL_SQL = 'select b.id, b.title,b.content,b.images,date_format(b.created_at,"%Y-%m-%d") pubTime, ' +
   'u.nickname creatorName, b.open_id openId from banner b left join user u on b.open_id = u.open_id where b.id = ?'
 const DELETE_BANNER_SQL = 'delete from banner where id = ?'
@@ -130,7 +135,8 @@ module.exports = {
   QUERY_SCHEDULES_SQL: QUERY_SCHEDULES_SQL,
   GET_SCHEDULE_DETAIL_SQL: GET_SCHEDULE_DETAIL_SQL,
   DELETE_SCHEDULE_SQL: DELETE_SCHEDULE_SQL,
-  QUERY_BANNERS_SQL: QUERY_BANNERS_SQL,
+  QUERY_BANNERS_BY_MAJOR_SQL: QUERY_BANNERS_BY_MAJOR_SQL,
+  QUERY_BANNERS_BY_COLLEGE_SQL: QUERY_BANNERS_BY_COLLEGE_SQL,
   GET_BANNER_DETAIL_SQL: GET_BANNER_DETAIL_SQL,
   DELETE_BANNER_SQL: DELETE_BANNER_SQL,
   INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL,

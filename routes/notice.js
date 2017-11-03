@@ -65,10 +65,10 @@ router.post('/list', function (req, res) {
   var sql
   if (body.type === 'class') {
     sql = dbSqls.QUERY_CLASS_NOTICES_SQL
-    params = [body.type, body.majorId, body.placeId, body.year, 'Y', skip, count]
+    params = [body.type, body.schoolId, body.collegeId, body.majorId, body.placeId, body.year, 'Y', skip, count]
   } else {
     sql = dbSqls.QUERY_COLLEGE_NOTICES_SQL
-    params = [body.type, body.collegeId, body.placeId, 'Y', skip, count]
+    params = [body.type, body.schoolId, body.collegeId, body.placeId, 'Y', skip, count]
   }
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(sql, params, function (err, result) {
