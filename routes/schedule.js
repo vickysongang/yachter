@@ -19,8 +19,9 @@ router.post('/insert', function (req, res) {
       body.schoolId,
       body.content,
       body.year,
-      body.seasonId,
+      body.classId,
       body.images,
+      body.placeId,
       now,
       now
     ]
