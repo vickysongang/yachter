@@ -32,6 +32,7 @@ router.post('/insert', function (req, res) {
       } else {
         var noticeId = result.insertId
         var relParams = [
+          body.schoolId,
           body.majorId,
           body.collegeId,
           body.placeId,

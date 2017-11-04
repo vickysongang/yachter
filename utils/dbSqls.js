@@ -33,8 +33,8 @@ const QUERY_CLASS_BYNAME_SQL = 'select * from class where name = ?'
 //notice
 const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,images,' +
   'approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?)'
-const INSERT_NOTICE_REL_SQL = 'insert into notice_relation(major_id,college_id,place_id,year,notice_id)' +
-  'values (?,?,?,?,?)'
+const INSERT_NOTICE_REL_SQL = 'insert into notice_relation(school_id,major_id,college_id,place_id,year,notice_id)' +
+  'values (?,?,?,?,?,?)'
 
 const QUERY_COLLEGE_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") pubTime,' +
