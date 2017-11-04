@@ -22,6 +22,7 @@ router.post('/insert', function (req, res) {
       body.classId,
       body.images,
       body.placeId,
+      body.majorId,
       now,
       now
     ]
