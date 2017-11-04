@@ -32,6 +32,25 @@ router.all('/schools', function (req, res) {
   })
 });
 
+router.all('/school/detail', function (req, res) {
+  var body = req.body
+  var params = [body.schoolId]
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.GET_SCHOOL_DETAIL, params, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      res.end();
+      conn.release();
+    })
+  })
+});
+
 router.post('/colleges', function (req, res) {
   var body = req.body
   var params = [body.schoolId]

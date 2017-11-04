@@ -16,6 +16,7 @@ const QUERY_USERINFO_SQL = 'select u.open_id, u.school_id,s.name school_name, u.
 
 //common
 const QUERY_SCHOOLS_SQL = 'select * from school order by rank'
+const GET_SCHOOL_DETAIL = 'select * from school where id = ?'
 const QUERY_COLLEGES_SQL = 'select c.id, c.name from college c, school_to_college sc' +
   ' where sc.college_id = c.id and sc.school_id = ? order by sc.rank'
 const QUERY_MAJORS_SQL = 'select m.id, m.name from major m, college_to_major cm where m.id = cm.major_id' +
@@ -142,5 +143,6 @@ module.exports = {
   INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL,
   GET_CONFIG_SQL: GET_CONFIG_SQL,
   INSERT_CLASS_SQL: INSERT_CLASS_SQL,
-  QUERY_CLASS_BYNAME_SQL: QUERY_CLASS_BYNAME_SQL
+  QUERY_CLASS_BYNAME_SQL: QUERY_CLASS_BYNAME_SQL,
+  GET_SCHOOL_DETAIL: GET_SCHOOL_DETAIL
 }
