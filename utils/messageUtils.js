@@ -15,6 +15,7 @@ function sendTextMessage(content, data, access_token, callback) {
     })
     .set('content-type', 'application/x-www-form-urlencoded')
     .end(function (err, result) {
+      console.log('rrrrrr:', result)
       callback(err, result)
     })
 }
