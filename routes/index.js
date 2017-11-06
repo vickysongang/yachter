@@ -276,10 +276,12 @@ router.post('/contact', function (req, res) {
   });
   req.on('end', function () {
     console.log('11111:',req.rawBody)
-    var parser = new xml2js.Parser()
-    var json =  parser.parseString(req.rawBody)
-    console.log('sssss:', JSON.stringify(json))
-    res.send(JSON.stringify(json));
+    var xmlParser = new xml2js.Parser({explicitArray : false, ignoreAttrs : true})
+    xmlParser.parseString(req.rawBody, function (err, result) {
+      //将返回的结果再次格式化
+      console.log(JSON.stringify(result));
+      res.send(JSON.stringify(result));
+    });
   });
 });
 
