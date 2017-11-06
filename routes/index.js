@@ -284,7 +284,9 @@ router.post('/contact', function (req, res) {
         switch (data.MsgType) {
           case 'text': {//用户在客服会话中发送文本消息
             console.log('ssssss:', data)
-            messageUtils.sendTextMessage("我知道了", data, access_token);
+            messageUtils.sendTextMessage("我知道了", data, access_token, function (err, result) {
+              console.log('发送文本消息：', result)
+            });
             break;
           }
           case 'image': { //用户在客服会话中发送图片消息

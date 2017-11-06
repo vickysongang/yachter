@@ -31,7 +31,7 @@ function sendImageMessage(media_id, data, access_token, callback) {
     })
     .set('content-type', 'application/x-www-form-urlencoded')
     .end(function (err, result) {
-      res.json(result)
+      callback(err, result)
     })
 }
 
