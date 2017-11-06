@@ -254,6 +254,7 @@ router.all('/config', function (req, res) {
 
 router.get('/contact', function (req, res) {
   var params = req.params
+  console.log('paramsparamsparams:', params)
   const token = 'zhishanzhimei'
   //token 就是自己填写的令牌
   var key = [token, params.timestamp, params.nonce].sort().join('');
