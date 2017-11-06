@@ -53,6 +53,7 @@ const GET_NOTICE_DETAIL_SQL = 'select n.id, n.title,n.content,n.images,n.read_co
   'pubTime, u.nickname creatorName, n.open_id openId from notice n left join user u on n.open_id = u.open_id where n.id = ?'
 
 const DELETE_NOTICE_SQL = 'delete from notice where id = ?'
+const DELETE_NOTICE_RELATION_SQL = 'delete from notice_relation where notice_id = ?'
 
 const INCR_NOTICE_READCOUNT_SQL = 'update notice set read_count = read_count + 1 where id = ?'
 
@@ -126,6 +127,7 @@ module.exports = {
   QUERY_CLASS_NOTICES_SQL: QUERY_CLASS_NOTICES_SQL,
   GET_NOTICE_DETAIL_SQL: GET_NOTICE_DETAIL_SQL,
   DELETE_NOTICE_SQL: DELETE_NOTICE_SQL,
+  DELETE_NOTICE_RELATION_SQL:DELETE_NOTICE_RELATION_SQL,
   INCR_NOTICE_READCOUNT_SQL: INCR_NOTICE_READCOUNT_SQL,
   INSERT_EXAM_SQL: INSERT_EXAM_SQL,
   QUERY_EXAMS_SQL: QUERY_EXAMS_SQL,

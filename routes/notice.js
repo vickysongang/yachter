@@ -115,7 +115,9 @@ router.post('/delete', function (req, res) {
           msg: err
         })
       } else {
-        res.json(result)
+        conn.query(dbSqls.DELETE_NOTICE_RELATION_SQL, params, function (err1, result1) {
+          res.json(result1)
+        })
       }
       conn.release();
     })
