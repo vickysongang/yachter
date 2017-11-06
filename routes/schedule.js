@@ -12,12 +12,18 @@ var dbSqls = require('../utils/dbSqls')
 router.post('/insert', function (req, res) {
   var body = req.body
   var now = new Date()
+  var content = body.content
+  var abstract = htmlUtils.delHtmlTag(content)
+  if (abstract.length > 100) {
+    abstract = abstract.substring(0, 100) + '...'
+  }
   return dbUtils.getDBConnection(function (err, conn) {
     var params = [
       body.openId,
       body.collegeId,
       body.schoolId,
-      body.content,
+      content,
+      abstract,
       body.year,
       body.classId,
       body.images,

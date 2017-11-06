@@ -10,11 +10,17 @@ router.post('/insert', function (req, res) {
   var body = req.body
   var now = new Date()
   return dbUtils.getDBConnection(function (err, conn) {
+    var content = body.content
+    var abstract = htmlUtils.delHtmlTag(content)
+    if (abstract.length > 100) {
+      abstract = abstract.substring(0, 100) + '...'
+    }
     var params = [
       body.title,
       body.openId,
       body.categoryName,
-      body.content,
+      content,
+      abstract,
       body.type,
       body.images,
       body.schoolId,

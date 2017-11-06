@@ -31,7 +31,7 @@ const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 const INSERT_CLASS_SQL = 'insert into class(name,type) values (?,?)'
 const QUERY_CLASS_BYNAME_SQL = 'select * from class where name = ?'
 //notice
-const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,type,images,' +
+const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,abstract,type,images,' +
   'approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?)'
 const INSERT_NOTICE_REL_SQL = 'insert into notice_relation(school_id,major_id,college_id,place_id,year,notice_id)' +
   'values (?,?,?,?,?,?)'
@@ -42,7 +42,7 @@ const QUERY_COLLEGE_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100
   'nr where n.type = ? and n.id = nr.notice_id  and nr.school_id = ? and  nr.college_id = ? and ' +
   'nr.place_id = ? and n.approve_flag = ? order by nr.rank,n.created_at desc limit ?, ?'
 
-const QUERY_CLASS_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
+const QUERY_CLASS_NOTICES_SQL = 'select n.id, n.title,n.abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") pubTime,' +
   'u.nickname creatorName from notice n left join user u on n.open_id = u.open_id, notice_relation ' +
   'nr where n.type = ? and n.id = nr.notice_id and nr.school_id = ? and nr.college_id = ? and ' +
@@ -59,7 +59,7 @@ const INCR_NOTICE_READCOUNT_SQL = 'update notice set read_count = read_count + 1
 
 
 //schedule
-const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,content,year,class_id,images,' +
+const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,content,abstract,year,class_id,images,' +
   'place_id,major_id,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?)'
 
 const QUERY_SCHEDULES_SQL = 'select s.id,c.name collegeName,s.year,s.place_id,p.name placeName, m.name majorName,' +
@@ -74,10 +74,10 @@ const DELETE_SCHEDULE_SQL = 'delete from schedule where id = ?'
 
 
 //exam
-const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_name,content,type,images,school_id,' +
+const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_name,content,abstract,type,images,school_id,' +
   'college_id,place_id,approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?)'
 
-const QUERY_EXAMS_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
+const QUERY_EXAMS_SQL = 'select n.id, n.title,n.abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
   'pubTime,u.nickname creatorName from exam n left join user u on n.open_id = u.open_id where ' +
   'n.type = ? and n.school_id = ? and n.college_id = ? and n.place_id = ? and approve_flag = ?' +
