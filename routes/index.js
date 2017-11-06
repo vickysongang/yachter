@@ -282,10 +282,9 @@ router.post('/contact', function (req, res) {
       var data = result.xml
       requestUtils.requestAccessToken(function (err, result) {
         var access_token = result.access_token
-        console.log('access_token:', access_token)
         switch (data.MsgType) {
           case 'text': {//用户在客服会话中发送文本消息
-            console.log('ssssss:', data)
+            console.log('datadata:', data)
             messageUtils.sendTextMessage("我知道了", data, access_token, function (err, result) {
             });
             break;
