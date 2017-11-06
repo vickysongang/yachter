@@ -251,10 +251,8 @@ router.all('/config', function (req, res) {
   })
 });
 
-
 router.get('/contact', function (req, res) {
   var params = req.query
-  console.log('paramsparamsparams:', params)
   const token = 'zhishanzhimei'
   //token 就是自己填写的令牌
   var key = [token, params.timestamp, params.nonce].sort().join('');
@@ -267,6 +265,12 @@ router.get('/contact', function (req, res) {
   } else {
     res.send(false)
   }
+});
+
+
+router.post('/contact', function (req, res) {
+  console.log(req)
+  req.send('success')
 });
 
 module.exports = router;
