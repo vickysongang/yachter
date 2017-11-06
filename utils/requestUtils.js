@@ -22,12 +22,11 @@ function requestOpenId(code, callback) {
 }
 
 function requestAccessToken(callback) {
-  var url = ACCESS_TOKEN_URL + +'&appid=' + APPID + '&secret=' + SECRET
+  var url = ACCESS_TOKEN_URL + '&appid=' + APPID + '&secret=' + SECRET
   superagent
     .get(url)
     .set('content-type', 'application/json')
     .end(function (err, result) {
-      console.log('resultresultresult:', result)
       callback(err, result)
     })
 }
