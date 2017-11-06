@@ -269,6 +269,7 @@ router.get('/contact', function (req, res) {
 
 
 router.post('/contact', function (req, res) {
+  console.log(req.HTTP_RAW_POST_DATA)
   res.send('success')
 });
 
