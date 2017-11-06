@@ -269,7 +269,8 @@ router.get('/contact', function (req, res) {
 
 
 router.post('/contact', function (req, res) {
-  console.log('req is:', req.body)
+  console.log('req is:', req)
+  console.log('req is:', req.url)
   req.send('success')
 });
 
