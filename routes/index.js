@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var dbUtils = require('../utils/dbUtils')
+var messageUtils = require('../utils/messageUtils')
+var requestUtils = require('../utils/requestUtils')
 var dbSqls = require('../utils/dbSqls')
 var crypto = require('crypto')
 var xml2js = require('xml2js')
@@ -275,12 +277,32 @@ router.post('/contact', function (req, res) {
     req.rawBody += chunk;
   });
   req.on('end', function () {
-    console.log('11111:',req.rawBody)
-    var xmlParser = new xml2js.Parser({explicitArray : false, ignoreAttrs : true})
+    var xmlParser = new xml2js.Parser({explicitArray: false, ignoreAttrs: true})
     xmlParser.parseString(req.rawBody, function (err, result) {
-      //将返回的结果再次格式化
-      console.log(JSON.stringify(result));
-      res.send(JSON.stringify(result));
+      var data = result.xml
+      requestUtils.requestAccessToken(function (err, access_token) {
+        switch (data.MsgType) {
+          case 'text': {//用户在客服会话中发送文本消息
+            console.log('ssssss:', data)
+            messageUtils.sendTextMessage("我知道了", data, access_token);
+            break;
+          }
+          case 'image': { //用户在客服会话中发送图片消息
+            messageUtils.sendImageMessage(data.MediaId, data, access_token);
+            break;
+          }
+          case 'event': {
+            console.log('event');
+            if (data.Event == 'user_enter_tempsession') {  //用户在小程序“客服会话按钮”进入客服会话,在聊天框进入不会有此事件
+              messageUtils.sendTextMessage("您有什么问题吗?", data, access_token);
+            } else if (data.Event == 'kf_create_session') { //网页客服进入回话
+              console.log('网页客服进入回话');
+            }
+            break;
+          }
+        }
+      })
+      res.send('success');
     });
   });
 });
