@@ -278,7 +278,7 @@ router.post('/contact', function (req, res) {
   req.on('end', function () {
     var parser = new xml2js.Parser()
     var json =  parser.parseString(req.rawBody)
-    console.log('sssss:', json)
+    console.log('sssss:', JSON.stringify(json))
     res.send(JSON.stringify(json));
   });
 });
