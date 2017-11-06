@@ -269,9 +269,7 @@ router.get('/contact', function (req, res) {
 
 
 router.post('/contact', function (req, res) {
-  console.log('req is:', req.body)
-  console.log('req is:', req.url)
-  req.send('山东老家山东老家山东')
+  res.send('success')
 });
 
 module.exports = router;
