@@ -294,7 +294,6 @@ router.post('/contact', function (req, res) {
             break;
           }
           case 'event': {
-            console.log('event');
             if (data.Event == 'user_enter_tempsession') {  //用户在小程序“客服会话按钮”进入客服会话,在聊天框进入不会有此事件
               messageUtils.sendTextMessage("您有什么问题吗?", data, access_token, function (err, result) {
 
