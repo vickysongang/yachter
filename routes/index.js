@@ -287,7 +287,6 @@ router.post('/contact', function (req, res) {
           case 'text': {//用户在客服会话中发送文本消息
             console.log('ssssss:', data)
             messageUtils.sendTextMessage("我知道了", data, access_token, function (err, result) {
-              console.log('发送文本消息：', result)
             });
             break;
           }

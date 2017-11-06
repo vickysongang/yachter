@@ -27,6 +27,7 @@ function requestAccessToken(callback) {
     .get(url)
     .set('content-type', 'application/json')
     .end(function (err, result) {
+      console.log('resultresultresult:', result)
       callback(err, result)
     })
 }
