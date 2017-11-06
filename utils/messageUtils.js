@@ -9,7 +9,6 @@ function sendTextMessage(content, data, access_token, callback) {
     .send({
       touser: data.FromUserName,
       msgtype: "text",
-      Mobile: phone,
       text: {
         content: content
       }
@@ -26,7 +25,6 @@ function sendImageMessage(media_id, data, access_token, callback) {
     .send({
       touser: data.FromUserName,
       msgtype: "image",
-      Mobile: phone,
       image: {
         media_id: media_id
       }
