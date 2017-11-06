@@ -3,6 +3,7 @@ var router = express.Router();
 var dbUtils = require('../utils/dbUtils')
 var dbSqls = require('../utils/dbSqls')
 var crypto = require('crypto')
+var xml2json = require('xml2json')
 
 router.get('/', function (req, res) {
   return dbUtils.getDBConnection(function (err, conn) {
@@ -269,9 +270,17 @@ router.get('/contact', function (req, res) {
 
 
 router.post('/contact', function (req, res) {
-  console.log(req.body)
-  console.log(req.headers)
-  res.send('success')
+  req.rawBody = '';
+  var json = {};
+  req.setEncoding('utf8');
+  req.on('data', function (chunk) {
+    req.rawBody += chunk;
+  });
+  req.on('end', function () {
+    json = xml2json.toJson(req.rawBody);
+    console.log('sssss:', json)
+    res.send(JSON.stringify(json));
+  });
 });
 
 module.exports = router;
