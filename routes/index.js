@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var dbUtils = require('../utils/dbUtils')
 var dbSqls = require('../utils/dbSqls')
+var crypto = require('crypto')
 
 router.get('/', function (req, res) {
   return dbUtils.getDBConnection(function (err, conn) {
@@ -250,5 +251,21 @@ router.all('/config', function (req, res) {
   })
 });
 
+
+router.get('/contact', function (req, res) {
+  var params = req.params
+  const token = 'zhishanzhimei'
+  //token 就是自己填写的令牌
+  var key = [token, params.timestamp, params.nonce].sort().join('');
+  //将token （自己设置的） 、timestamp（时间戳）、nonce（随机数）三个参数进行字典排序
+  var sha1 = crypto.createHash('sha1');
+  //将上面三个字符串拼接成一个字符串再进行sha1加密
+  sha1.update(key);
+  if (sha1.digest('hex') === params.signature) {
+    res.send(params.echostr)
+  } else {
+    res.send(false)
+  }
+});
 
 module.exports = router;
