@@ -32,7 +32,7 @@ const INSERT_CLASS_SQL = 'insert into class(name,type) values (?,?)'
 const QUERY_CLASS_BYNAME_SQL = 'select * from class where name = ?'
 //notice
 const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,content,abstract,type,images,' +
-  'approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?)'
+  'approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?)'
 const INSERT_NOTICE_REL_SQL = 'insert into notice_relation(school_id,major_id,college_id,place_id,year,notice_id)' +
   'values (?,?,?,?,?,?)'
 
@@ -60,7 +60,7 @@ const INCR_NOTICE_READCOUNT_SQL = 'update notice set read_count = read_count + 1
 
 //schedule
 const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,content,abstract,year,class_id,images,' +
-  'place_id,major_id,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?)'
+  'place_id,major_id,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?)'
 
 const QUERY_SCHEDULES_SQL = 'select s.id,c.name collegeName,s.year,s.place_id,p.name placeName, m.name majorName,' +
   's.class_id,cl.name className from schedule s left join user u on s.open_id = u.open_id,' +
@@ -75,7 +75,7 @@ const DELETE_SCHEDULE_SQL = 'delete from schedule where id = ?'
 
 //exam
 const INSERT_EXAM_SQL = 'insert into exam(title,open_id,category_name,content,abstract,type,images,school_id,' +
-  'college_id,place_id,approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?)'
+  'college_id,place_id,approve_flag,read_count,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
 
 const QUERY_EXAMS_SQL = 'select n.id, n.title,n.abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") ' +
