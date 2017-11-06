@@ -23,10 +23,12 @@ function requestOpenId(code, callback) {
 
 function requestAccessToken(callback) {
   var url = ACCESS_TOKEN_URL + '&appid=' + APPID + '&secret=' + SECRET
+  console.log('urlurlurl:', url)
   superagent
     .get(url)
     .set('content-type', 'application/json')
     .end(function (err, result) {
+      console.log('result:', result)
       callback(err, result)
     })
 }
