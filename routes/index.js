@@ -271,11 +271,11 @@ router.get('/contact', function (req, res) {
 
 router.post('/contact', function (req, res) {
   req.rawBody = '';
-  req.setEncoding('utf8');
   req.on('data', function (chunk) {
     req.rawBody += chunk;
   });
   req.on('end', function () {
+    console.log('11111:',req.rawBody)
     var parser = new xml2js.Parser()
     var json =  parser.parseString(req.rawBody)
     console.log('sssss:', JSON.stringify(json))
