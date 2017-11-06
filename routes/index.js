@@ -269,7 +269,7 @@ router.get('/contact', function (req, res) {
 
 
 router.post('/contact', function (req, res) {
-  console.log(req)
+  console.log(req.body)
   req.send('success')
 });
 
