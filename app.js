@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 // 设置默认超时时间
 app.use(timeout('15s'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', router);
 app.use('/user', userRouter);

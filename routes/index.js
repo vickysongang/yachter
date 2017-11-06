@@ -269,7 +269,8 @@ router.get('/contact', function (req, res) {
 
 
 router.post('/contact', function (req, res) {
-  console.log(req.HTTP_RAW_POST_DATA)
+  console.log(req.body)
+  console.log(req.headers)
   res.send('success')
 });
 
