@@ -36,7 +36,7 @@ const INSERT_NOTICE_SQL = 'insert into notice(title,open_id,category_name,conten
 const INSERT_NOTICE_REL_SQL = 'insert into notice_relation(school_id,major_id,college_id,place_id,year,notice_id)' +
   'values (?,?,?,?,?,?)'
 
-const QUERY_COLLEGE_NOTICES_SQL = 'select n.id, n.title,substr(n.content, 1, 100) abstract,' +
+const QUERY_COLLEGE_NOTICES_SQL = 'select distinct n.id, n.title,substr(n.content, 1, 100) abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") pubTime,' +
   'u.nickname creatorName from notice n left join user u on n.open_id = u.open_id, notice_relation ' +
   'nr where n.type = ? and n.id = nr.notice_id  and nr.school_id = ? and  nr.college_id = ? and ' +
