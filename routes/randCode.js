@@ -12,7 +12,7 @@ router.post('/send', function (req, res) {
   var body = req.body
   var phone = body.phone
   var code = body.code
-  var content = '验证码为：' + code + '【至善至美】'
+  var content = '验证码为：' + code + '【在职小帮手】'
   superagent
     .post(URL)
     .send({
