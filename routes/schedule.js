@@ -30,6 +30,7 @@ router.post('/insert', function (req, res) {
       body.images,
       body.placeId,
       body.majorId,
+      body.approveFlag,
       now,
       now
     ]

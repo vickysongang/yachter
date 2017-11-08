@@ -60,7 +60,7 @@ const INCR_NOTICE_READCOUNT_SQL = 'update notice set read_count = read_count + 1
 
 //schedule
 const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,content,abstract,year,class_id,images,' +
-  'place_id,major_id,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?)'
+  'place_id,major_id,approve_flag,created_at,updated_at) values (?,?,?,?,?,?,?,?,?,?,?,?,?)'
 
 const QUERY_SCHEDULES_SQL = 'select s.id,c.name collegeName,s.year,s.place_id,p.name placeName, m.name majorName,' +
   's.class_id,cl.name className from schedule s left join user u on s.open_id = u.open_id,' +
