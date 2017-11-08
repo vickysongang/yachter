@@ -55,7 +55,7 @@ router.post('/list', function (req, res) {
   var page = parseInt(body.page || 0)
   var count = parseInt(body.count || 10)
   var skip = page * count
-  var params = [body.schoolId, body.collegeId, skip, count]
+  var params = [body.schoolId, body.collegeId, 'Y', skip, count]
   console.log(params)
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_SCHEDULES_SQL, params, function (err, result) {
