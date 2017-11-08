@@ -76,7 +76,7 @@ router.post('/colleges', function (req, res) {
 
 router.post('/majors', function (req, res) {
   var body = req.body
-  var params = [body.collegeId, body.year]
+  var params = [body.collegeId]
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_MAJORS_SQL, params, function (err, result) {
       if (err) {
