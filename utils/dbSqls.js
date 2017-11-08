@@ -96,6 +96,8 @@ const QUERY_BANNERS_BY_MAJOR_SQL = 'select id, cover from banner where module = 
   'and school_id = ? and college_id = ? and major_id = ?'
 const QUERY_BANNERS_BY_COLLEGE_SQL = 'select id, cover from banner where module = ? and type = ? ' +
   'and school_id = ? and college_id = ?'
+const QUERY_BANNERS = 'select b.id, b.cover from banner b ' +
+  'where b.school_id = ? order by b.order limit 3'
 const GET_BANNER_DETAIL_SQL = 'select b.id, b.title,b.content,b.images,date_format(b.created_at,"%Y-%m-%d") pubTime, ' +
   'u.nickname creatorName, b.open_id openId from banner b left join user u on b.open_id = u.open_id where b.id = ?'
 const DELETE_BANNER_SQL = 'delete from banner where id = ?'
@@ -127,7 +129,7 @@ module.exports = {
   QUERY_CLASS_NOTICES_SQL: QUERY_CLASS_NOTICES_SQL,
   GET_NOTICE_DETAIL_SQL: GET_NOTICE_DETAIL_SQL,
   DELETE_NOTICE_SQL: DELETE_NOTICE_SQL,
-  DELETE_NOTICE_RELATION_SQL:DELETE_NOTICE_RELATION_SQL,
+  DELETE_NOTICE_RELATION_SQL: DELETE_NOTICE_RELATION_SQL,
   INCR_NOTICE_READCOUNT_SQL: INCR_NOTICE_READCOUNT_SQL,
   INSERT_EXAM_SQL: INSERT_EXAM_SQL,
   QUERY_EXAMS_SQL: QUERY_EXAMS_SQL,
@@ -140,6 +142,7 @@ module.exports = {
   DELETE_SCHEDULE_SQL: DELETE_SCHEDULE_SQL,
   QUERY_BANNERS_BY_MAJOR_SQL: QUERY_BANNERS_BY_MAJOR_SQL,
   QUERY_BANNERS_BY_COLLEGE_SQL: QUERY_BANNERS_BY_COLLEGE_SQL,
+  QUERY_BANNERS: QUERY_BANNERS,
   GET_BANNER_DETAIL_SQL: GET_BANNER_DETAIL_SQL,
   DELETE_BANNER_SQL: DELETE_BANNER_SQL,
   INSERT_FEEDBACK_SQL: INSERT_FEEDBACK_SQL,

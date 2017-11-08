@@ -8,15 +8,15 @@ var dbSqls = require('../utils/dbSqls')
 
 router.post('/list', function (req, res) {
   var body = req.body
-  var sql
-  var params = []
-  if (body.type === 'class') {
-    sql = dbSqls.QUERY_BANNERS_BY_MAJOR_SQL
-    params = [body.module, body.type, body.schoolId, body.collegeId, body.majorId]
-  } else {
-    sql = dbSqls.QUERY_BANNERS_BY_COLLEGE_SQL
-    params = [body.module, body.type, body.schoolId, body.collegeId]
-  }
+  var sql = dbSqls.QUERY_BANNERS
+  var params = [body.schoolId]
+  // if (body.type === 'class') {
+  //   sql = dbSqls.QUERY_BANNERS_BY_MAJOR_SQL
+  //   params = [body.module, body.type, body.schoolId, body.collegeId, body.majorId]
+  // } else {
+  //   sql = dbSqls.QUERY_BANNERS_BY_COLLEGE_SQL
+  //   params = [body.module, body.type, body.schoolId, body.collegeId]
+  // }
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(sql, params, function (err, result) {
       if (err) {
