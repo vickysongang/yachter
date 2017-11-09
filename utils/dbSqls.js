@@ -42,7 +42,7 @@ const QUERY_COLLEGE_NOTICES_SQL = 'select distinct n.id, n.title,abstract,' +
   'nr where n.type = ? and n.id = nr.notice_id  and nr.school_id = ? and  nr.college_id = ? and ' +
   'nr.place_id = ? and n.approve_flag = ? order by nr.rank,n.created_at desc limit ?, ?'
 
-const QUERY_CLASS_NOTICES_SQL = 'select n.id, n.title,n.abstract,' +
+const QUERY_CLASS_NOTICES_SQL = 'select distinct n.id, n.title,n.abstract,' +
   'n.read_count readCount,n.category_name categoryName,date_format(n.created_at,"%Y-%m-%d") pubTime,' +
   'u.nickname creatorName from notice n left join user u on n.open_id = u.open_id, notice_relation ' +
   'nr where n.type = ? and n.id = nr.notice_id and nr.school_id = ? and nr.college_id = ? and ' +
@@ -65,7 +65,7 @@ const INSERT_SCHEDULE_SQL = 'insert into schedule(open_id,college_id,school_id,c
 const QUERY_SCHEDULES_SQL = 'select s.id,c.name collegeName,s.year,s.place_id,p.name placeName, m.name majorName,' +
   's.class_id,cl.name className from schedule s left join user u on s.open_id = u.open_id left join class cl on ' +
   's.class_id = cl.id, college c,place p, major m where s.place_id = p.id and s.major_id = m.id and ' +
-  's.college_id = c.id and s.school_id = ? and s.college_id = ? and approve_flag = ? limit ?, ?'
+  's.college_id = c.id and s.school_id = ? and s.college_id = ? and s.major_id = ? and approve_flag = ? limit ?, ?'
 
 const GET_SCHEDULE_DETAIL_SQL = 'select s.id,s.content,s.year, s.images, s.open_id openId, date_format(s.created_at,"%Y-%m-%d") pubTime,' +
   ' u.nickname creatorName from schedule s left join user u on s.open_id = u.open_id where  s.id = ?'
