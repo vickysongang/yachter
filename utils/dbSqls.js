@@ -21,7 +21,7 @@ const QUERY_COLLEGES_SQL = 'select c.id, c.name from college c, school_to_colleg
   ' where sc.college_id = c.id and sc.school_id = ? order by sc.rank'
 const QUERY_MAJORS_SQL = 'select m.id, m.name from major m, college_to_major cm where m.id = cm.major_id' +
   ' and cm.college_id = ? order by rank'
-const QUERY_YEARS_SQL = 'select * from year'
+const QUERY_YEARS_SQL = 'select * from year order by rank'
 const QUERY_DEFAULT_CLASSES_SQL = 'select * from class where type="default"'
 const QUERY_ALL_CLASSES_SQL = 'select * from class'
 const QUERY_PROVINCES_SQL = 'select * from province'
