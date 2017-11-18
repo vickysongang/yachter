@@ -62,6 +62,29 @@ router.post('/insert', function (req, res) {
   })
 });
 
+router.post('/update', function (req, res) {
+  var body = req.body
+  var params = [
+    body.nickname,
+    body.gender,
+    body.avatarUrl,
+    body.openId
+  ]
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.UPDATE_USER_SQL, params, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      conn.release();
+    })
+  })
+});
+
 router.post('/queryById', function (req, res) {
   var body = req.body
   return dbUtils.getDBConnection(function (err, conn) {
