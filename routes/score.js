@@ -36,7 +36,6 @@ var post = function (options, params, callback) {
     output.on('end', function () {
       var result = iconv.decode(bufferHelper.toBuffer(), 'GBK');
       callback(null, params, res.headers, result);
-
     });
   });
   req.on('error', function (err) {
@@ -62,9 +61,10 @@ router.post('/query', function (req, res) {
       'accept-encoding': 'gzip,deflate',
       'content-type': 'application/x-www-form-urlencoded'
     },
-    timeout: 14000
+    timeout: 12000
   }
   post(options, params, function (err, args, headers, data) {
+    console.log('score err is :', err)
     if (err) {
       res.json({
         code: 1,
