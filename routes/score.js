@@ -73,6 +73,7 @@ router.post('/query', function (req, res) {
         code: 1,
         msg: '对不起，服务器内部发生错误！'
       })
+      res.end()
       return
     }
     var result = []
