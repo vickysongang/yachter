@@ -27,6 +27,8 @@ var post = function (options, params, callback) {
       var gzip = zlib.createGunzip();
       res.pipe(gzip);
       output = gzip;
+    } else {
+      output = res;
     }
     output.on('data', function (chunk) {
       bufferHelper.concat(chunk);

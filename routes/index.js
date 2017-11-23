@@ -10,8 +10,6 @@ var xml2js = require('xml2js')
 router.get('/', function (req, res) {
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query('SELECT 1 + 1 AS solution', function (err, rows, fileds) {
-      console.log('rows:', rows)
-      console.log('fileds:', fileds)
       res.json({rows: rows, fileds: fileds})
       res.end();
       conn.release();
