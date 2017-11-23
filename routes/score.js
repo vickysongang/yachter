@@ -35,7 +35,9 @@ var post = function (options, params, callback) {
     });
     output.on('end', function () {
       var result = iconv.decode(bufferHelper.toBuffer(), 'GBK');
-      callback(null, params, res.headers, result);
+      if (result.indexOf('504 Gateway Time-out') === -1) {
+        callback(null, params, res.headers, result);
+      }
     });
   });
   req.on('error', function (err) {
