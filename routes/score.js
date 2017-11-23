@@ -61,7 +61,7 @@ router.post('/query', function (req, res) {
       'accept-encoding': 'gzip,deflate',
       'content-type': 'application/x-www-form-urlencoded'
     },
-    timeout: 12000
+    timeout: 10000
   }
   post(options, params, function (err, args, headers, data) {
     console.log('score err is :', err)
