@@ -45,7 +45,7 @@ var post = function (options, params, callback) {
     callback(err, null, null, null);
   });
   req.on('timeout', function () {
-    callback(new Error('请求超时'), null, null, null);
+    callback('请求超时', null, null, null);
   });
   req.write(params);
   req.end();
@@ -73,45 +73,44 @@ router.post('/query', function (req, res) {
         code: 1,
         msg: '对不起，服务器内部发生错误！'
       })
-      res.end()
-      return
-    }
-    var result = []
-    var $ = cheerio.load(data, {
-      ignoreWhitespace: true,
-      xmlMode: true
-    })
-    var trs = $('table').children('tr')
-    trs.each(function (index) {
-      if (index > 0) {
-        var item = $(this).text().trim()
-        item = item.replace(/( )/g, ",").replace(",,", ",")
-        var itemArr = item.split(',')
-        if (itemArr.length === 3) {
-          result.push({
-            subject: itemArr[0],
-            score: itemArr[1],
-            date: itemArr[2]
-          })
-        } else if (itemArr.length === 1) {
-          result.push({
-            subject: itemArr[0],
-            score: '',
-            date: ''
-          })
-        }
-      }
-    })
-    if (result.length > 0) {
-      res.json({
-        code: 0,
-        result: result
-      })
     } else {
-      res.json({
-        code: 1,
-        msg: '对不起，没有符合条件的考生数据，请重新核实查询条件！'
+      var result = []
+      var $ = cheerio.load(data, {
+        ignoreWhitespace: true,
+        xmlMode: true
       })
+      var trs = $('table').children('tr')
+      trs.each(function (index) {
+        if (index > 0) {
+          var item = $(this).text().trim()
+          item = item.replace(/( )/g, ",").replace(",,", ",")
+          var itemArr = item.split(',')
+          if (itemArr.length === 3) {
+            result.push({
+              subject: itemArr[0],
+              score: itemArr[1],
+              date: itemArr[2]
+            })
+          } else if (itemArr.length === 1) {
+            result.push({
+              subject: itemArr[0],
+              score: '',
+              date: ''
+            })
+          }
+        }
+      })
+      if (result.length > 0) {
+        res.json({
+          code: 0,
+          result: result
+        })
+      } else {
+        res.json({
+          code: 1,
+          msg: '对不起，没有符合条件的考生数据，请重新核实查询条件！'
+        })
+      }
     }
   });
 })
