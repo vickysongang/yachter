@@ -35,6 +35,7 @@ var post = function (options, params, callback) {
     });
     output.on('end', function () {
       var result = iconv.decode(bufferHelper.toBuffer(), 'GBK');
+      console.log('result is:', result)
       if (result.indexOf('504 Gateway Time-out') === -1) {
         callback(null, params, res.headers, result);
       }
@@ -66,8 +67,8 @@ router.post('/query', function (req, res) {
     timeout: 10000
   }
   post(options, params, function (err, args, headers, data) {
-    console.log('score err is :', err)
     if (err) {
+      console.log('score err is :', err)
       res.json({
         code: 1,
         msg: '对不起，服务器内部发生错误！'
