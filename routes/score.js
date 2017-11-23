@@ -36,7 +36,14 @@ var post = function (options, params, callback) {
     output.on('end', function () {
       var result = iconv.decode(bufferHelper.toBuffer(), 'GBK');
       callback(null, params, res.headers, result);
+
     });
+  });
+  req.on('error', function (err) {
+    callback(err, null, null, null);
+  });
+  req.on('timeout', function () {
+    callback(new Error('请求超时'), null, null, null);
   });
   req.write(params);
   req.end();
@@ -54,9 +61,17 @@ router.post('/query', function (req, res) {
       'Content-Length': params.length,
       'accept-encoding': 'gzip,deflate',
       'content-type': 'application/x-www-form-urlencoded'
-    }
+    },
+    timeout: 14000
   }
   post(options, params, function (err, args, headers, data) {
+    if (err) {
+      res.json({
+        code: 1,
+        msg: '对不起，服务器内部发生错误！'
+      })
+      return
+    }
     var result = []
     var $ = cheerio.load(data, {
       ignoreWhitespace: true,
