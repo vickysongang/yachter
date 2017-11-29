@@ -35,20 +35,19 @@ var post = function (options, params, callback) {
     });
     output.on('end', function () {
       var result = iconv.decode(bufferHelper.toBuffer(), 'GBK');
-      console.log('result is:', result)
       if (result.indexOf('504 Gateway Time-out') === -1) {
         callback(null, params, res.headers, result);
       }
     });
   });
+  req.write(params);
   req.on('error', function (err) {
     callback(err, null, null, null);
   });
   req.on('timeout', function () {
     callback('请求超时', null, null, null);
   });
-  req.write(params);
-  req.end();
+  // req.end();
 };
 
 router.post('/query', function (req, res) {
