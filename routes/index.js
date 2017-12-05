@@ -231,6 +231,44 @@ router.post('/categories', function (req, res) {
   })
 });
 
+router.post('/qualifications', function (req, res) {
+  var body = req.body
+  var params = ['%' + body.name + '%', '%' + body.sfzh]
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.QUERY_QUALIFICATION_SQL, params, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      res.end();
+      conn.release();
+    })
+  })
+});
+
+router.post('/pay', function (req, res) {
+  var body = req.body
+  var params = ['%' + body.name + '%']
+  return dbUtils.getDBConnection(function (err, conn) {
+    conn.query(dbSqls.QUERY_PAY_SQL, params, function (err, result) {
+      if (err) {
+        res.json({
+          code: -1,
+          msg: err
+        })
+      } else {
+        res.json(result)
+      }
+      res.end();
+      conn.release();
+    })
+  })
+});
+
 router.all('/config', function (req, res) {
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.GET_CONFIG_SQL, function (err, result) {
