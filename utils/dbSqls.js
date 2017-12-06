@@ -28,7 +28,7 @@ const QUERY_PROVINCES_SQL = 'select * from province'
 const QUERY_PLACES_SQL = 'select p.id,p.name from place p, school_to_place sp ' +
   'where p.id = sp.place_id and sp.school_id = ? order by rank'
 const QUERY_QUALIFICATION_SQL = 'select * from qualifications where name like ? and number like ?'
-const QUERY_PAY_SQL = 'select * from pay where name like ?'
+const QUERY_PAY_SQL = 'select * from pay where name like ? and qualifications = ?'
 const QUERY_CATEGORY_SQL = 'select * from category where module = ?'
 const INSERT_CLASS_SQL = 'insert into class(name,type) values (?,?)'
 const QUERY_CLASS_BYNAME_SQL = 'select * from class where name = ?'

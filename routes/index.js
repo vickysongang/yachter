@@ -252,7 +252,7 @@ router.post('/qualifications', function (req, res) {
 
 router.post('/pay', function (req, res) {
   var body = req.body
-  var params = ['%' + body.name + '%']
+  var params = ['%' + body.name + '%', body.qualifications]
   return dbUtils.getDBConnection(function (err, conn) {
     conn.query(dbSqls.QUERY_PAY_SQL, params, function (err, result) {
       if (err) {
